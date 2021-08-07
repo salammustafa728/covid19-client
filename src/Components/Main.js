@@ -13,12 +13,14 @@ export class Main extends Component {
             alData: [],
             err: '',
             blogPosts: [],
-            currentPageNumber: 1,
-            totalItems: 192,
-            itemsPerPage: 10,
+            postPerPage : 20,
+            currentPage:1,
             sortType: 'asc',
-            isSaved: false
+            isSaved: false,
+            setCurrentPage:1,
+            paginate:1
         }
+       
     }
 
     setdata = (idx) => {
@@ -35,9 +37,6 @@ export class Main extends Component {
             this.setState({
                 alData: response.data,
                 blogPosts: response.data,
-                // currentPageNumber: response.currentPageNumber,
-                // totalItems: response.totalItems,
-                // itemsPerPage: response.itemsPerPage
             })
 
         }).catch(err => this.setState({ err: err.message }));
@@ -51,23 +50,29 @@ export class Main extends Component {
         console.log('handle select', number);
         this.setState({ currentPageNumber: number });
     }
-    paginate=(pageNumber)=>{
-        this.setState({
-            currentPageNumber: pageNumber,
-            alData: this.state.alData.slice(10,20)
-        })
-    }
+        // this.setState({
+        //     currentPageNumber: pageNumber,
+        //     alData: this.state.alData.slice(10,20)
+        // })
+    
     onSort = (sortType) => {
         this.setState({
             sortType: sortType
         })
     }
+     
+
     render() {
         const { alData, sortType } = this.state;
         const sorted = alData.sort((a, b) => {
             const isReversed = (sortType === 'desc') ? -1 : 1;
             return isReversed * a.Country.localeCompare(b.Country);
         });
+       const idxOfLst = this.state.currentPage * this.state.postPerPage;
+       const idxOfFirst = idxOfLst - this.state.postPerPage;
+       const currentPosts = this.state.alData.slice(idxOfFirst,idxOfLst);
+       const paginate=(number)=>{this.setState({currentPage:number})};
+
         return (
             <div>
                 
@@ -92,10 +97,8 @@ export class Main extends Component {
                             <br />
                             <div style={{ marginLeft: '10%' }}>
                                 <ApiData
-                                    alData={this.state.alData}
-                                    // currentPost={currentPost}
+                                    alData={currentPosts}
                                     sorted={sorted}
-                                    saveNum={this.saveNum}
                                     deleteLS={this.deleteLS}
                                     setdata={this.setdata}
                                     getdata={this.getdata}
@@ -111,8 +114,9 @@ export class Main extends Component {
                 </div>
                 <div>
                    <Pagination
-                  paginate={this.paginate}
-                  alData={this.state.alData}
+                  paginate={paginate}
+                  postPerPage={this.state.postPerPage}
+                  totalPosts={this.state.alData.length}
                    />
                 </div>
             </div>

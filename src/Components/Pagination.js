@@ -1,27 +1,29 @@
 import React, { Component } from 'react'
 import './Main.css'
 export class Pagination extends Component {
+
     render() {
         const pageNum = [];
-        for (let i = 0; i < Math.ceil(110 / 10); i++) {
+        for (let i = 0; i < Math.ceil(this.props.totalPosts/ this.props.postPerPage); i++) {
             pageNum.push(i);
         }
         return (
-            <div>
-                <div class="container2">
+            <div style={{margin:'auto',width:'50%'}}>
+            <nav style={{textAlign:'center'}} >
+                {/* <div class="container2"> */}
                     <ul className="pagination" >
                          {
                             pageNum.map((number) => {
                                 return (
-                                    <div>
-                                    <li key={number} className='page-item' ><a  href='!#' > {number} </a></li>
-                                    </div>
+                                    <li  key={number} className='page-item' >
+                                        <button onClick={()=>this.props.paginate(number)} href='!#' className='page-link' > 
+                                        {number} </button></li>
                                 )
                             })
                         }
                     </ul>
-                </div>
-            </div>
+                </nav>
+             </div>
         )
     }
 }

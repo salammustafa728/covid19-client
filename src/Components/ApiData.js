@@ -91,7 +91,8 @@ export class ApiData extends Component {
                                     />
                                 </div>
                             )
-                        }).slice(0,10)
+                        })
+                        //.slice(0,10)
                     }
 
                 </div>

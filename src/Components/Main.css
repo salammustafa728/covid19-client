@@ -34,7 +34,8 @@ p{
   border-radius: 3px;
   box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
 }
-.pagination {
+
+/* .pagination {
   display: flex;
   list-style: none;
 }
@@ -73,4 +74,4 @@ p{
 }
 .pagination li:last-child {
   margin: 0 0 0 15px;
-}
+} */
