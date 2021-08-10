@@ -1,8 +1,6 @@
 import axios from 'axios';
-// import { Button } from 'bootstrap';
 import React, { Component } from 'react'
 import  Pagination  from './Pagination';
-// import Table from 'react-bootstrap/Table'
 import ApiData from './ApiData';
 import './Main.css'
 
@@ -12,13 +10,11 @@ export class Main extends Component {
         this.state = {
             alData: [],
             err: '',
-            blogPosts: [],
             postPerPage : 20,
             currentPage:1,
             sortType: 'asc',
             isSaved: false,
             setCurrentPage:1,
-            paginate:1
         }
        
     }
@@ -26,17 +22,16 @@ export class Main extends Component {
     setdata = (idx) => {
         localStorage.setItem('favorite', JSON.stringify(this.state.alData[idx]));
     }
-    getdata = () => {
-        let data = localStorage.getItem('favorite');
-        console.log(data);
-    }
+    // getdata = () => {
+    //     let data = localStorage.getItem('favorite');
+    //     console.log(data);
+    // }
 
     componentDidMount = async () => {
         const url = `${process.env.REACT_APP_SERVER_URL}/allData`;
         await axios.get(url).then((response) => {
             this.setState({
-                alData: response.data,
-                blogPosts: response.data,
+                alData: response.data
             })
 
         }).catch(err => this.setState({ err: err.message }));
@@ -45,15 +40,6 @@ export class Main extends Component {
         localStorage.removeItem('favorite');
 
     }
-
-    handleSelect(number) {
-        console.log('handle select', number);
-        this.setState({ currentPageNumber: number });
-    }
-        // this.setState({
-        //     currentPageNumber: pageNumber,
-        //     alData: this.state.alData.slice(10,20)
-        // })
     
     onSort = (sortType) => {
         this.setState({
@@ -65,7 +51,7 @@ export class Main extends Component {
     render() {
         const { alData, sortType } = this.state;
         const sorted = alData.sort((a, b) => {
-            const isReversed = (sortType === 'desc') ? -1 : 1;
+            const isReversed = ((sortType === 'desc') && (a.TotalDeaths < b.TotalDeaths)) ? -1 : 1;
             return isReversed * a.Country.localeCompare(b.Country);
         });
        const idxOfLst = this.state.currentPage * this.state.postPerPage;

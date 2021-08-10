@@ -10,7 +10,6 @@ export class Pagination extends Component {
         return (
             <div style={{margin:'auto',width:'50%'}}>
             <nav style={{textAlign:'center'}} >
-                {/* <div class="container2"> */}
                     <ul className="pagination" >
                          {
                             pageNum.map((number) => {

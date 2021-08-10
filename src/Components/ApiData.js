@@ -55,8 +55,7 @@ export class ApiData extends Component {
                                         width: '18rem', background: "#F6DFEB", marginBottom: '10px'
                                         , marginLeft: '20px', marginTop: '10px'
                                     }} onClick={() => { this.setState({ show: true }) }}>
-                                        <Card.Body>
-                                            <Card.Title onClick={() => {
+                                        <Card.Body onClick={() => {
                                                 this.setState({
                                                     Country: obj.Country,
                                                     totalConfirmed: obj.TotalConfirmed,
@@ -64,7 +63,8 @@ export class ApiData extends Component {
                                                     totalRecovered: obj.TotalRecovered,
                                                     date: obj.Date
                                                 })
-                                            }}>{obj.Country}</Card.Title>
+                                            }}>
+                                            <Card.Title >{obj.Country}</Card.Title>
                                             <Card.Text>
                                                 <ul>
                                                     <li >TotalConfirmed:{obj.TotalConfirmed}</li>
@@ -74,8 +74,8 @@ export class ApiData extends Component {
                                                 </ul>
                                             </Card.Text>
                                             <button className='btn' onClick={() => this.props.setdata(idx)}>set</button>
-                                            <button className='btn' onClick={() => this.props.getdata()}>get</button>
-                                            <button className='btn' onClick={() => this.props.deleteLS()}>Delete from localStorage</button>
+                                            {/* <button className='btn' onClick={() => this.props.getdata()}>get</button> */}
+                                            <button className='btn' onClick={() => this.props.deleteLS()}>Clear localStorage</button>
                                         </Card.Body>
                                     </Card>
                                     
@@ -92,7 +92,7 @@ export class ApiData extends Component {
                                 </div>
                             )
                         })
-                        //.slice(0,10)
+                     
                     }
 
                 </div>
