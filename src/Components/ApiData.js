@@ -73,7 +73,7 @@ export class ApiData extends Component {
                                                     <li > Date:{obj.Date}</li>
                                                 </ul>
                                             </Card.Text>
-                                            <button className='btn' onClick={() => this.props.setdata(idx)}>set</button>
+                                            <button className='btn' onClick={() => this.props.setdata(idx)}>Add LS</button>
                                             {/* <button className='btn' onClick={() => this.props.getdata()}>get</button> */}
                                             <button className='btn' onClick={() => this.props.deleteLS()}>Clear localStorage</button>
                                         </Card.Body>
